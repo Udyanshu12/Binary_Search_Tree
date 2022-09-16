@@ -9,6 +9,7 @@ def min_value_node(current_node):
 
 class BinarySearchTree:
     def __init__(self):
+
         self.root = None
 
     def insert(self, value):
@@ -39,3 +40,55 @@ class BinarySearchTree:
             else:
                 return True
         return False
+
+    def bfs(self):
+        current_node = self.root
+        results = []
+        queue = [current_node]
+        while len(queue) > 0:
+            current_node = queue.pop(0)
+            results.append(current_node.value)
+            if current_node.left:
+                queue.append(current_node.left)
+            if current_node.right:
+                queue.append(current_node.right)
+        return results
+
+    def dfs_pre_order(self):
+        results = []
+
+        def traverse(current_node):
+            results.append(current_node.value)
+            if current_node.left:
+                traverse(current_node.left)
+            if current_node.right:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+    def dfs_post_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left:
+                traverse(current_node.left)
+            if current_node.right:
+                traverse(current_node.right)
+            results.append(current_node.value)
+
+        traverse(self.root)
+        return results
+
+    def dfs_in_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left:
+                traverse(current_node.left)
+            results.append(current_node.value)
+            if current_node.right:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
